@@ -1,12 +1,6 @@
 #ifndef __ESP32P4_4D_INIT__
 #define __ESP32P4_4D_INIT__
 
-#if defined(CONFIG_ESP32P4_LCD_IN_LANDSCAPE)
-#define LCD_MADCTL_VALUE    0x20    // bit 5 (MV): row/column exchange for landscape
-#else
-#define LCD_MADCTL_VALUE    0x00
-#endif
-
 const jd9365_lcd_init_cmd_t esp32p4_4d_init_cmds[] = {
 #if defined(CONFIG_ESP32P4_LCD_70)
     {0xE0, (uint8_t[]){0x00}, 1, 0},
@@ -208,7 +202,6 @@ const jd9365_lcd_init_cmd_t esp32p4_4d_init_cmds[] = {
     {0xE0, (uint8_t[]){0x05}, 1, 0},
     {0x15, (uint8_t[]){0x1D}, 1, 0},
     {0xE0, (uint8_t[]){0x00}, 1, 0},
-    {0x36, (uint8_t[]){LCD_MADCTL_VALUE}, 1, 0},
     {0x11, (uint8_t[]){0x00}, 1, 120},
     {0x29, (uint8_t[]){0x00}, 1, 5},
     {0x35, (uint8_t[]){0x00}, 1, 0},
@@ -402,7 +395,6 @@ const jd9365_lcd_init_cmd_t esp32p4_4d_init_cmds[] = {
     {0x09, (uint8_t[]){0x11}, 1, 0},
     {0x0E, (uint8_t[]){0x48}, 1, 0},
     {0xE0, (uint8_t[]){0x00}, 1, 0},
-    {0x36, (uint8_t[]){LCD_MADCTL_VALUE}, 1, 0},
     {0x11, (uint8_t[]){0x00}, 1, 120},
     {0x29, (uint8_t[]){0x00}, 1, 20},
 #elif defined(CONFIG_ESP32P4_LCD_90)
@@ -618,7 +610,6 @@ const jd9365_lcd_init_cmd_t esp32p4_4d_init_cmds[] = {
 	{0x09, (uint8_t[]){0x60}, 1, 0},
 	{0x0E, (uint8_t[]){0x48}, 1, 0},
 	{0xE0, (uint8_t[]){0x00}, 1, 0},
-	{0x36, (uint8_t[]){LCD_MADCTL_VALUE}, 1, 0},
 	{0x11, (uint8_t[]){0x00}, 1, 120},
     {0x29, (uint8_t[]){0x00}, 1, 20},
     {0x35, (uint8_t[]){0x00}, 1, 0},
@@ -820,7 +811,6 @@ const jd9365_lcd_init_cmd_t esp32p4_4d_init_cmds[] = {
     {0x2B, (uint8_t[]){0x0F}, 1, 0},
     {0x37, (uint8_t[]){0x58}, 1, 0},
     {0xE0, (uint8_t[]){0x00}, 1, 0},
-    {0x36, (uint8_t[]){LCD_MADCTL_VALUE}, 1, 0},
     {0x11, (uint8_t[]){0x00}, 1, 120},
     {0x29, (uint8_t[]){0x00}, 1, 20},
 #elif defined(CONFIG_ESP32P4_LCD_34R)
@@ -1018,7 +1008,6 @@ const jd9365_lcd_init_cmd_t esp32p4_4d_init_cmds[] = {
     {0x77, (uint8_t[]){0x33}, 1, 0},
     {0x78, (uint8_t[]){0x43}, 1, 0},
     {0xE0, (uint8_t[]){0x00}, 1, 0},
-    {0x36, (uint8_t[]){LCD_MADCTL_VALUE}, 1, 0},
     {0x11, (uint8_t[]){0x00}, 1, 120},
     {0x29, (uint8_t[]){0x00}, 1, 20},
     {0x35, (uint8_t[]){0x00}, 1, 0},
@@ -1217,7 +1206,6 @@ const jd9365_lcd_init_cmd_t esp32p4_4d_init_cmds[] = {
     {0x77, (uint8_t[]){0x33}, 1, 0},
     {0x78, (uint8_t[]){0x43}, 1, 0},
     {0xE0, (uint8_t[]){0x00}, 1, 0},
-    {0x36, (uint8_t[]){LCD_MADCTL_VALUE}, 1, 0},
     {0x11, (uint8_t[]){0x00}, 1, 120},
     {0x29, (uint8_t[]){0x00}, 1, 20},
     {0x35, (uint8_t[]){0x00}, 1, 0},
