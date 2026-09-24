@@ -41,6 +41,15 @@ config ESP32P4_LCD_40R
 
 endchoice
 
+config ESP32P4_LCD_LANDSCAPE
+    bool "Use landscape orientation"
+    depends on ESP32P4_LCD_70 || ESP32P4_LCD_80 || ESP32P4_LCD_90 || ESP32P4_LCD_101
+    default n
+    help
+      Report landscape resolution (width greater than height) for the selected
+      rectangular display series. Round displays are square and do not support
+      this option.
+
 config ESP32P4_LCD_DOUBLE_BUFFER
     bool "Enable double framebuffer"
 
@@ -88,6 +97,13 @@ config LCD_INTERFACE_MIPI
     bool
     default n
 
+config ESP32P4_LCD_IN_LANDSCAPE
+    bool
+    default y if ESP32P4_LCD_LANDSCAPE
+    help
+      Internal flag, set to 1 when the selected display is configured for
+      landscape orientation. Not user-editable.
+
 config ESP32P4_4D_DISPLAY_NAME
     string
     default "ESP32-P4-70" if ESP32P4_LCD_70
@@ -102,6 +118,10 @@ config ESP32P4_4D_DISPLAY_NAME
 
 config ESP32P4_4D_LCD_WIDTH
     int
+    default 1280 if ESP32P4_LCD_IN_LANDSCAPE && ESP32P4_LCD_70
+    default 1280 if ESP32P4_LCD_IN_LANDSCAPE && ESP32P4_LCD_80
+    default 1280 if ESP32P4_LCD_IN_LANDSCAPE && ESP32P4_LCD_90
+    default 1280 if ESP32P4_LCD_IN_LANDSCAPE && ESP32P4_LCD_101
     default 800 if ESP32P4_LCD_70
     default 800 if ESP32P4_LCD_80
     default 800 if ESP32P4_LCD_90
@@ -109,10 +129,15 @@ config ESP32P4_4D_LCD_WIDTH
     default 800 if ESP32P4_LCD_34R
     default 720 if ESP32P4_LCD_40R
     help
-      LCD horizontal resolution in pixels, derived from selected display series.
+      LCD horizontal resolution in pixels, derived from selected display series
+      and orientation.
 
 config ESP32P4_4D_LCD_HEIGHT
     int
+    default 800 if ESP32P4_LCD_IN_LANDSCAPE && ESP32P4_LCD_70
+    default 800 if ESP32P4_LCD_IN_LANDSCAPE && ESP32P4_LCD_80
+    default 800 if ESP32P4_LCD_IN_LANDSCAPE && ESP32P4_LCD_90
+    default 800 if ESP32P4_LCD_IN_LANDSCAPE && ESP32P4_LCD_101
     default 1280 if ESP32P4_LCD_70
     default 1280 if ESP32P4_LCD_80
     default 1280 if ESP32P4_LCD_90
@@ -120,6 +145,7 @@ config ESP32P4_4D_LCD_HEIGHT
     default 800 if ESP32P4_LCD_34R
     default 720 if ESP32P4_LCD_40R
     help
-      LCD vertical resolution in pixels, derived from selected display series.
+      LCD vertical resolution in pixels, derived from selected display series
+      and orientation.
 
 endmenu
