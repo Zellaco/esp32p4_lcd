@@ -109,7 +109,13 @@ esp_err_t esp32p4_lcd_full_init(esp_lcd_panel_handle_t *ret_panel)
         .bits_per_pixel = LCD_BITS_PER_PIXEL,    // Implemented by LCD command `3Ah` (16/18/24)
         .vendor_config = &vendor_config,
     };
-    ESP_RETURN_ON_ERROR(esp_lcd_new_panel_jd9365(mipi_dbi_io, &panel_config, &panel_handle), TAG, "panel create failed");
+
+    bool rotate = false;
+#if defined(CONFIG_ESP32P4_LCD_LANDSCAPE)
+    rotate = true;
+#endif
+
+    ESP_RETURN_ON_ERROR(esp_lcd_new_panel_jd9365(mipi_dbi_io, &panel_config, &panel_handle, rotate), TAG, "panel create failed");
     ESP_RETURN_ON_ERROR(esp_lcd_panel_reset(panel_handle), TAG, "panel reset failed");
     ESP_RETURN_ON_ERROR(esp_lcd_panel_init(panel_handle), TAG, "panel init failed");
     ESP_RETURN_ON_ERROR(esp_lcd_panel_disp_on_off(panel_handle, true), TAG, "panel display on failed");
